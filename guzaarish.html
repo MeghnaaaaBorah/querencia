@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guzaarish Foundation - Querencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: #2d2d2d;
+            overflow-x: hidden;
+            font-weight: 500;
+            background: #FCFDF8;
+        }
+
+        /* Navigation (Same as original) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(252, 253, 248, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #F3F4EE;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #2d2d2d;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0.2rem 0.7rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555555;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #B58080;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #B58080;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* General Section Styling */
+        .section {
+            padding: 6rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
+        .section h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #2d2d2d;
+            text-align: center;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            color: #555555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .accent-line {
+            width: 60px;
+            height: 4px;
+            background: #B58080;
+            margin: 0 auto 3rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding-top: 150px;
+            padding-bottom: 4rem;
+            text-align: center;
+            background: #FCFDF8;
+        }
+
+        /* Guzaarish Content Section */
+        .guzaarish-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .guzaarish-text p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .guzaarish-image-placeholder {
+            width: 100%;
+            height: 450px;
+            background: #F3F4EE;
+            border: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .cta-link-container {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-link {
+            display: inline-block;
+            background: #B58080;
+            color: #FCFDF8;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid #B58080;
+        }
+
+        .cta-link:hover {
+            background: #a06b6b;
+            border-color: #a06b6b;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(181, 128, 128, 0.2);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background: #F3F4EE;
+            border-top: 4px solid #FCFDF8;
+            border-bottom: 4px solid #FCFDF8;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            height: 250px;
+            background: #FCFDF8;
+            border: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 4rem 2rem;
+            }
+
+            .section h2 {
+                font-size: 2.5rem;
+            }
+
+            .guzaarish-content {
+                grid-template-columns: 1fr;
+            }
+
+            .guzaarish-image-placeholder {
+                height: 300px;
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">QUERENCIA</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="testimonials.html">Testimonials & Impact</a></li>
+                <li><a href="guzaarish.html">Guzaarish</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="index.html#mission">Mission</a></li>
+                <li><a href="index.html#vision">Vision</a></li>
+                <li><a href="index.html#founder">Founder</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header section">
+        <div class="fade-in">
+            <h2>Guzaarish Foundation</h2>
+            <div class="accent-line"></div>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="fade-in">
+            <div class="guzaarish-content">
+                <div class="guzaarish-text">
+                    <p>Guzaarish was born from a simple wish for change. Meghna Borah, a pre-teen from Assam, founded it
+                        at the age of 12, starting with an online platform where teenagers from across the country came
+                        together to raise their voices and walk in solidarity.</p>
+                    <p>As the vision grew, Guzaarish moved offline—into slums, donation drives, clean-up campaigns, and
+                        educational outreach. These early experiences laid the foundation for Querencia, inspired by the
+                        belief that real, lasting change comes from both awareness and empowerment.</p>
+                </div>
+                <div class="guzaarish-image-placeholder">
+                    Guzaarish <br> Event Photo
+                </div>
+            </div>
+            <div class="cta-link-container">
+                <a href="events.html" class="cta-link">Explore Guzaarish Events</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section gallery-section">
+        <div class="fade-in">
+            <h2>Glimpses of Guzaarish</h2>
+            <div class="accent-line"></div>
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in">Image Placeholder 1</div>
+                <div class="gallery-item fade-in">Image Placeholder 2</div>
+                <div class="gallery-item fade-in">Image Placeholder 3</div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" style="background:#F3F4EE; padding:4rem 0 2rem 0; border-top:1px solid #e0e0e0;">
+        <div
+            style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:2rem; padding:0 3rem;">
+            <div style="flex:1; min-width:250px;">
+                <div style="font-size:1.3rem; font-weight:800; color:#B58080; margin-bottom:0.5rem;">Querencia
+                </div>
+                <div style="font-size:1rem; color:#2d2d2d; font-weight:600; margin-bottom:0.3rem;">Making you your
+                    own strength</div>
+                <div style="font-size:0.98rem; color:#555; margin-bottom:1.2rem;">At Querencia, we empower young
+                    people to find their strength and use their voice for impact and change. We are a youth-led
+                    movement building confident, compassionate changemakers across and beyond India by teaching 21st
+                    century skills.</div>
+            </div>
+            <div style="flex:1; min-width:220px;">
+                <div style="font-size:1.1rem; font-weight:700; color:#B58080; margin-bottom:0.7rem;">Contact
+                </div>
+                <div style="margin-bottom:0.7rem;"><a href="mailto:querencia.tgf@gmail.com"
+                        style="color:#2d2d2d; text-decoration:none; font-weight:600;">querencia.tgf@gmail.com</a>
+                </div>
+                <div style="margin-bottom:0.7rem;"><a href="https://instagram.com/querencia.tgf" target="_blank"
+                        style="color:#B58080; text-decoration:none; font-weight:600;">Instagram</a></div>
+                <div style="margin-bottom:0.7rem;"><a href="https://linkedin.com/company/querencia-tgf" target="_blank"
+                        style="color:#B58080; text-decoration:none; font-weight:600;">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- SCROLL ANIMATIONS (Fade-in and Nav Bar) ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(252, 253, 248, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            } else {
+                navbar.style.background = 'rgba(252, 253, 248, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

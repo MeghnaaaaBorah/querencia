@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact & Testimonials - Querencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: #2d2d2d;
+            overflow-x: hidden;
+            font-weight: 500;
+            background: #FCFDF8;
+        }
+
+        /* Navigation (Same as original) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(252, 253, 248, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #F3F4EE;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #2d2d2d;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0.2rem 0.7rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555555;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #B58080;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #B58080;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* General Section Styling */
+        .section {
+            padding: 6rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
+        .section h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #2d2d2d;
+            text-align: center;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            color: #555555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .accent-line {
+            width: 60px;
+            height: 4px;
+            background: #B58080;
+            margin: 0 auto 3rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding-top: 150px;
+            padding-bottom: 4rem;
+            text-align: center;
+            background: #F3F4EE;
+        }
+
+        .page-header p {
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.3rem;
+        }
+
+        /* Impact Section */
+        .impact {
+            background: #FCFDF8;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .impact-stat h3 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #B58080;
+            line-height: 1.1;
+        }
+
+        .impact-stat p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2d2d2d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .impact-tagline {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 4rem;
+            color: #2d2d2d;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: #F3F4EE;
+            border-top: 4px solid #FCFDF8;
+            border-bottom: 4px solid #FCFDF8;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: #FCFDF8;
+            border: 2px solid #F3F4EE;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(181, 128, 128, 0.15);
+        }
+
+        .testimonial-card blockquote {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #555555;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #B58080;
+            padding-left: 1.5rem;
+        }
+
+        .testimonial-card cite {
+            font-style: normal;
+            font-weight: 800;
+            color: #2d2d2d;
+            display: block;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 4rem 2rem;
+            }
+
+            .section h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-stat h3 {
+                font-size: 3rem;
+            }
+
+            .impact-tagline {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">QUERENCIA</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="#impact">Testimonials & Impact</a></li>
+                <li><a href="guzaarish.html">Guzaarish</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="index.html#mission">Mission</a></li>
+                <li><a href="index.html#vision">Vision</a></li>
+                <li><a href="index.html#founder">Founder</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header section">
+        <div class="fade-in">
+            <h2>QUERENCIA'S IMPACT</h2>
+            <div class="accent-line"></div>
+            <p>A testament to our commitment to youth empowerment, reflected in real numbers and the powerful stories of
+                the students we serve.</p>
+        </div>
+    </header>
+
+    <section id="impact" class="section impact">
+        <div class="fade-in">
+            <h2>Our Impact by the Numbers</h2>
+            <div class="accent-line"></div>
+            <div class="impact-grid">
+                <div class="impact-stat">
+                    <h3 class="counter" data-target="10000" data-plus="true">0</h3>
+                    <p>Students Trained</p>
+                </div>
+                <div class="impact-stat">
+                    <h3 class="counter" data-target="30" data-plus="true">0</h3>
+                    <p>Partnerships</p>
+                </div>
+                <div class="impact-stat">
+                    <h3 class="counter" data-target="25" data-plus="true">0</h3>
+                    <p>Events Hosted</p>
+                </div>
+                <div class="impact-stat">
+                    <h3 class="counter" data-target="100" data-plus="true">0</h3>
+                    <p>Success Stories</p>
+                </div>
+                <div class="impact-stat">
+                    <h3 class="counter" data-target="17" data-plus="true">0</h3>
+                    <p>Cities Reached</p>
+                </div>
+            </div>
+            <p class="impact-tagline">10,000 students, 30 partners, 25 events, 17 cities - 1 organisation</p>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section testimonials">
+        <div class="fade-in">
+            <h2>Our Impact, In Their Words</h2>
+            <div class="accent-line"></div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <blockquote>"It is a platform through which I not only develop my communication skills but also I
+                        get the chance to improve my leadership skills and identify myself new."</blockquote>
+                    <cite>Saniya Bansal, PGDAV College, Delhi University</cite>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <blockquote>"My communication skills have certainly improved since I joined. I learnt team work and
+                        team leading here. Approaching people and talking to them is something I didn't know until I
+                        joined Querencia. It was a really great experience here."</blockquote>
+                    <cite>Durlabh Biswas, KIIT, Bhubaneswar</cite>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <blockquote>"My time management skills, being accountable for my work, public speaking, confidence,
+                        reaching out to strangers skills everything has increased"</blockquote>
+                    <cite>Uddipa Pal, NIOS, Kolkata</cite>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <blockquote>"It has helped my communication skills, my speaking skills, my creativity, how an
+                        organisation works, my ethics and my way of thinking."</blockquote>
+                    <cite>Kanishkna M. Moral, Royal Global School, Assam</cite>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <blockquote>"Helped me learn how to navigate through LinkedIn better."</blockquote>
+                    <cite>Naimita S. Bhuyan, Delhi University</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact"
+        style="background:#F3F4EE; padding:4rem 0 2rem 0; margin-top:3rem; border-top:1px solid #e0e0e0;">
+        <div
+            style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:2rem; padding:0 3rem;">
+            <div style="flex:1; min-width:250px;">
+                <div style="font-size:1.3rem; font-weight:800; color:#B58080; margin-bottom:0.5rem;">Querencia
+                </div>
+                <div style="font-size:1rem; color:#2d2d2d; font-weight:600; margin-bottom:0.3rem;">Making you your
+                    own strength</div>
+                <div style="font-size:0.98rem; color:#555; margin-bottom:1.2rem;">At Querencia, we empower young
+                    people to find their strength and use their voice for impact and change. We are a youth-led
+                    movement building confident, compassionate changemakers across and beyond India by teaching 21st
+                    century skills.</div>
+            </div>
+            <div style="flex:1; min-width:220px;">
+                <div style="font-size:1.1rem; font-weight:700; color:#B58080; margin-bottom:0.7rem;">Contact
+                </div>
+                <div style="margin-bottom:0.7rem;"><a href="mailto:querencia.tgf@gmail.com"
+                        style="color:#2d2d2d; text-decoration:none; font-weight:600;">querencia.tgf@gmail.com</a>
+                </div>
+                <div style="margin-bottom:0.7rem;"><a href="https://instagram.com/querencia.tgf" target="_blank"
+                        style="color:#B58080; text-decoration:none; font-weight:600;">Instagram</a></div>
+                <div style="margin-bottom:0.7rem;"><a href="https://linkedin.com/company/querencia-tgf" target="_blank"
+                        style="color:#B58080; text-decoration:none; font-weight:600;">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- SCROLL ANIMATIONS (Fade-in and Nav Bar) ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(252, 253, 248, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            } else {
+                navbar.style.background = 'rgba(252, 253, 248, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // --- NUMBER COUNTER ANIMATION ---
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200; // Universal speed for all counters
+
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText.replace('+', '');
+                    const increment = target / speed;
+
+                    if (count < target) {
+                        const newCount = Math.ceil(count + increment);
+                        counter.innerText = newCount;
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target + (counter.dataset.plus ? '+' : '');
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        const counterObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    counterObserver.unobserve(entry.target); // Animate only once
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const impactGrid = document.querySelector('.impact-grid');
+        if (impactGrid) {
+            counterObserver.observe(impactGrid);
+        }
+
+    </script>
+</body>
+
+</html>

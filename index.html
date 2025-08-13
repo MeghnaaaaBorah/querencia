@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Querencia - Making You Your Own Strength</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: #2d2d2d;
+            overflow-x: hidden;
+            font-weight: 500;
+            background: #FCFDF8;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(252, 253, 248, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #F3F4EE;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #2d2d2d;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0.2rem 0.7rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555555;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #B58080;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #B58080;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #FCFDF8 0%, #F3F4EE 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 100px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(45deg, transparent 49%, rgba(181, 128, 128, 0.02) 50%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, rgba(181, 128, 128, 0.02) 50%, transparent 51%);
+            background-size: 80px 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: #2d2d2d;
+            z-index: 10;
+            position: relative;
+            max-width: 1000px;
+            padding: 0 3rem;
+        }
+
+        .hero-video {
+            width: 600px;
+            height: 350px;
+            background: #FCFDF8;
+            border: 2px solid #F3F4EE;
+            margin: 0 auto 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            color: #555555;
+        }
+
+        .hero-video::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(181, 128, 128, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0;
+            animation: slideUp 1s ease forwards 0.5s;
+            color: #2d2d2d;
+        }
+
+        .hero .subheadline {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: slideUp 1s ease forwards 0.7s;
+            color: #555555;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            opacity: 0;
+            animation: slideUp 1s ease forwards 0.9s;
+            font-weight: 500;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 3rem;
+            color: #555555;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #B58080;
+            color: #FCFDF8;
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: slideUp 1s ease forwards 1.1s;
+            border: 2px solid #B58080;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            background: #a06b6b;
+            border-color: #a06b6b;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(181, 128, 128, 0.3);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 6rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
+        .section h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #2d2d2d;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            color: #555555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        /* Mission Section */
+        .mission {
+            background: #F3F4EE;
+            border-top: 4px solid #FCFDF8;
+            border-bottom: 4px solid #FCFDF8;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            margin-top: 4rem;
+            border: 2px solid #FCFDF8;
+        }
+
+        .mission-card {
+            background: #FCFDF8;
+            padding: 3rem;
+            border: 1px solid #F3F4EE;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mission-card:hover {
+            background: #B58080;
+            color: #FCFDF8;
+            transform: scale(1.02);
+            z-index: 10;
+            box-shadow: 0 20px 40px rgba(181, 128, 128, 0.2);
+        }
+
+        .mission-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2d2d2d;
+        }
+
+        .mission-card:hover h3 {
+            color: #FCFDF8;
+        }
+
+        .mission-card p {
+            font-weight: 600;
+            line-height: 1.6;
+            color: #555555;
+        }
+
+        .mission-card:hover p {
+            color: #FCFDF8;
+        }
+
+        /* Vision Section */
+        .vision {
+            text-align: center;
+            background: #FCFDF8;
+            border-top: 4px solid #F3F4EE;
+            border-bottom: 4px solid #F3F4EE;
+        }
+
+        .vision-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem;
+            background: #F3F4EE;
+            border: 3px solid #B58080;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .vision-content::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #B58080, #c99999);
+            z-index: -1;
+        }
+
+        .vision-content p {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            color: #2d2d2d;
+        }
+
+        /* Founder Section */
+        .founder {
+            background: #F3F4EE;
+            border-top: 4px solid #B58080;
+        }
+
+        .founder-content {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .founder-image {
+            width: 400px;
+            height: 400px;
+            background: #FCFDF8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555555;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 4px solid #F3F4EE;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        }
+
+        .founder-image::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            background: linear-gradient(45deg, #B58080, #c99999);
+            z-index: -1;
+        }
+
+        .founder-text h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #2d2d2d;
+        }
+
+        .founder-text p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            color: #555555;
+        }
+
+        .founder-cta {
+            background: #B58080;
+            color: #FCFDF8;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            border: 2px solid #B58080;
+            transition: all 0.3s ease;
+        }
+
+        .founder-cta:hover {
+            background: #a06b6b;
+            border-color: #a06b6b;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(181, 128, 128, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .founder-content {
+                grid-template-columns: 300px 1fr;
+                gap: 3rem;
+            }
+
+            .founder-image {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-video {
+                width: 100%;
+                max-width: 500px;
+                height: 280px;
+            }
+
+            .section {
+                padding: 4rem 2rem;
+            }
+
+            .section h2 {
+                font-size: 2.5rem;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .founder-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .founder-image {
+                width: 250px;
+                height: 250px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            .hero .subheadline {
+                font-size: 1.3rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+
+            .mission-card {
+                padding: 2rem;
+            }
+
+            .vision-content {
+                padding: 2rem;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Sharp geometric elements */
+        .geometric-accent {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(181, 128, 128, 0.05);
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+
+        .hero .geometric-accent:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero .geometric-accent:nth-child(2) {
+            bottom: 10%;
+            right: 5%;
+            animation: float 6s ease-in-out infinite 2s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: rotate(45deg) translateY(0px);
+            }
+
+            50% {
+                transform: rotate(45deg) translateY(-20px);
+            }
+        }
+
+        /* Additional Premium Elements */
+        .accent-line {
+            width: 60px;
+            height: 4px;
+            background: #B58080;
+            margin: 0 auto 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">QUERENCIA</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="testimonials.html">Testimonials & Impact</a></li>
+                <li><a href="guzaarish.html">Guzaarish</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#vision">Vision</a></li>
+                <li><a href="#founder">Founder</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="geometric-accent"></div>
+        <div class="geometric-accent"></div>
+
+        <div class="hero-content">
+            <h1>QUERENCIA</h1>
+            <p class="subheadline">Making you your own strength</p>
+            <div class="hero-video">
+                <iframe width="100%" height="315"
+                    src="https://drive.google.com/file/d/19cV9fM_fF0tW1VFJQx3hHYGrBkTAk51m/preview" frameborder="0"
+                    allowfullscreen allow="autoplay"></iframe>
+            </div>
+            <p>At Querencia, we believe in the transformative power of young minds. We are a youth-led organization from
+                Jorhat, Assam passionately dedicated to empowering students. Our work focuses on cultivating 21st
+                century skills like critical thinking, confident communication, AI awareness and compassionate civic
+                engagement through hands-on experiences and impactful initiatives.</p>
+            <a href="#" class="cta-button">Get Free Curriculum</a>
+
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="section mission">
+        <div class="fade-in">
+            <h2>Our Mission</h2>
+            <div class="accent-line"></div>
+            <p>At Querencia, we believe every young person deserves the tools to lead. Our mission is to make teenagers
+                their own strength.</p>
+
+            <div class="mission-grid">
+                <div class="mission-card fade-in">
+                    <h3>🎯 World-Class Training</h3>
+                    <p>Equip students with world class training in 21st century skills such as leadership, financial
+                        literacy, public speaking and more.</p>
+                </div>
+                <div class="mission-card fade-in">
+                    <h3>🗣️ Empower Voices</h3>
+                    <p>Empower youth to find their voice and use it - for advocacy, impact and positive change in their
+                        communities.</p>
+                </div>
+                <div class="mission-card fade-in">
+                    <h3>🤝 Community Engagement</h3>
+                    <p>Engage communities through transformative initiatives like youth parliaments, slum education
+                        drives and women empowerment summits.</p>
+                </div>
+                <div class="mission-card fade-in">
+                    <h3>🌟 Elevate Talent</h3>
+                    <p>Elevate untapped talent by offering mentorship and real world opportunities to create lasting
+                        impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision" class="section vision">
+        <div class="fade-in">
+            <h2>Our Vision</h2>
+            <div class="accent-line"></div>
+            <div class="vision-content">
+                <p>To become India's most powerful youth-led movement for skill development - nurturing confident,
+                    compassionate changemakers from every corner of the country.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section id="founder" class="section founder">
+        <div class="fade-in">
+            <h2>About the Founder</h2>
+            <div class="accent-line"></div>
+            <div class="founder-content">
+                <div class="founder-image">
+                    <img src="assets/founder.jpg" alt="Founder - Meghna"
+                        style="width:220px; height:220px; object-fit:cover; border-radius:50%; box-shadow:0 4px 24px rgba(0,0,0,0.07); border:4px solid #F3F4EE;" />
+                </div>
+                <div class="founder-text">
+                    <h3>MEGHNA</h3>
+                    <p>Meghna, a passionate and determined teen, founded Querencia on her 17th birthday after leading
+                        the Guzaarish Foundation, a non-profit she ran for over five years.</p>
+
+                    <p>Growing up in the North East of India, she experienced the limitations of resources and
+                        opportunities firsthand. During her time at UWC Mahindra and other national cohorts, Meghna's
+                        realization deepened and she saw the stark difference between education and opportunities
+                        between tier 1 cities and regions like the North East.</p>
+
+                    <p>This realization became the heart of Querencia—a place where individuals, regardless of their
+                        background or location, could draw their strength. It's a place where any person can study
+                        anything, without limitations.</p>
+
+                    <a href="#" class="founder-cta">Connect with Meghna</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background:#F3F4EE; padding:2.5rem 0 1.5rem 0; margin-top:3rem; border-top:1px solid #e0e0e0;">
+        <div
+            style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:2rem; padding:0 2rem;">
+            <div style="flex:1; min-width:250px;">
+                <div style="font-size:1.3rem; font-weight:800; color:#B58080; margin-bottom:0.5rem;">Querencia
+                </div>
+                <div style="font-size:1rem; color:#2d2d2d; font-weight:600; margin-bottom:0.3rem;">Making you your
+                    own strength</div>
+                <div style="font-size:0.98rem; color:#555; margin-bottom:1.2rem;">At Querencia, we empower young
+                    people to find their strength and use their voice for impact and change. We are a youth-led
+                    movement building confident, compassionate changemakers across and beyond India by teaching 21st
+                    century skills.</div>
+            </div>
+            <div style="flex:1; min-width:220px;">
+                <div style="font-size:1.1rem; font-weight:700; color:#B58080; margin-bottom:0.7rem;">Contact
+                </div>
+                <div style="margin-bottom:0.7rem;"><a href="mailto:querencia.tgf@gmail.com"
+                        style="color:#2d2d2d; text-decoration:none; font-weight:600;">querencia.tgf@gmail.com</a>
+                </div>
+                <div style="margin-bottom:0.7rem;"><a href="https://instagram.com/querencia.tgf" target="_blank"
+                        style="color:#B58080; text-decoration:none; font-weight:600;">Instagram</a></div>
+                <div style="margin-bottom:0.7rem;"><a href="https://linkedin.com/company/querencia-tgf" target="_blank"
+                        style="color:#B58080; text-decoration:none; font-weight:600;">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(252, 253, 248, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            } else {
+                navbar.style.background = 'rgba(252, 253, 248, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

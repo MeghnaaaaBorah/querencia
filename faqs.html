@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - Querencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: #2d2d2d;
+            overflow-x: hidden;
+            font-weight: 500;
+            background: #FCFDF8;
+        }
+
+        /* Navigation (Same as original) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(252, 253, 248, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #F3F4EE;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #2d2d2d;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0.2rem 0.7rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555555;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #B58080;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #B58080;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* General Section Styling */
+        .section {
+            padding: 6rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
+        .section h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #2d2d2d;
+            text-align: center;
+        }
+
+        .accent-line {
+            width: 60px;
+            height: 4px;
+            background: #B58080;
+            margin: 0 auto 3rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding-top: 150px;
+            padding-bottom: 4rem;
+            text-align: center;
+            background: #F3F4EE;
+        }
+
+        .page-header p {
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.3rem;
+            color: #555555;
+        }
+
+        /* FAQ Accordion Styling */
+        .faq-container {
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item {
+            border-bottom: 2px solid #F3F4EE;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 1.5rem 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2d2d2d;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background-color: #F3F4EE;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #B58080;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+        }
+
+        .faq-answer p {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 4rem 2rem;
+            }
+
+            .section h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+
+            .faq-question {
+                font-size: 1rem;
+            }
+
+            .faq-answer p {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">QUERENCIA</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="testimonials.html">Testimonials & Impact</a></li>
+                <li><a href="guzaarish.html">Guzaarish</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="index.html#mission">Mission</a></li>
+                <li><a href="index.html#vision">Vision</a></li>
+                <li><a href="index.html#founder">Founder</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header section">
+        <div class="fade-in">
+            <h2>Frequently Asked Questions</h2>
+            <div class="accent-line"></div>
+            <p>Find answers to common questions about our mission, programs, and how you can get involved.</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="faq-container fade-in">
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>1. What is Querencia?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Querencia is an organization dedicated to making essential 21st-century skills accessible to
+                        young minds in India, particularly high school and university students in Tier 2 and Tier 3
+                        cities. We aim to bridge the gap by providing mentorship and skills needed to thrive in today's
+                        fast-paced world.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>2. What does "Querencia" mean?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>"Querencia" is a Spanish word referring to a place where one feels safe, strong, and authentic; a
+                        place from which one's strength of character is drawn. This embodies our mission to help
+                        students find their inner strength and build their future.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>3. What is Querencia's mission and vision?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p><b>Mission:</b> To empower students from Tier 2 and Tier 3 cities with crucial 21st-century
+                        skills and mentorship, enabling them to excel in a rapidly evolving global landscape.
+                        <br><b>Vision:</b> To create a future where every young individual in India, regardless of their
+                        geographical location, has equitable access to quality education and opportunities that foster
+                        holistic development and career readiness.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>4. Who is Querencia for?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Querencia primarily serves high school and university students, especially those residing in Tier
+                        2 and Tier 3 cities across India. However, we are present for everyone, irrespective of any
+                        background.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>5. What kind of skills does Querencia teach?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>We focus on crucial 21st-century skills, including but not limited to communication, leadership,
+                        critical thinking, problem-solving, digital literacy, and collaboration. Our curriculum is
+                        designed to be practical and industry-relevant.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>6. Can I see the full curriculum?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, a detailed General Curriculum Overview is available for download on our About Us page. This
+                        document outlines the core modules and learning objectives of our programs.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>7. How are Querencia's programs delivered?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Our programs are delivered through a blend of workshops, mentorship programs, interactive events,
+                        and practical projects, designed to be engaging and effective.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>8. Are your programs available online or offline?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>We offer both online and offline programs, including in-person events and virtual mentorship, to
+                        ensure accessibility for students in various locations.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>9. How can I find out about upcoming events?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>All our upcoming events are listed on the "Events" page of our website. Please check regularly
+                        for new announcements and registration details.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>10. What types of internship opportunities does Querencia offer?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>We offer various internship roles, including Research Intern, Content Creation Intern, Social
+                        Media Marketing Intern, and Campus Ambassador, among others. These roles are designed to provide
+                        practical experience and skill development.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>11. What are the general qualifications for internships?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>While specific qualifications may by role, a general requirement for all internships is that
+                        applicants must have attended at least one Querencia event. Other common qualifications include
+                        strong communication skills, relevant academic background, and a passion for our mission.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>12. How do I apply for an internship?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Details on how to apply for each internship role, including application forms and deadlines, are
+                        provided on the "Internship Opportunities" page of our website.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>13. How can I contact Querencia?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>You can reach us via email at querencia.tgf@gmail.com. We are also active on social media.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>14. Where can I find Querencia on social media?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>You can connect with us on Instagram and LinkedIn. Links to our profiles are available in the
+                        footer of our website.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>15. How can I support Querencia's mission?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>You can support us by spreading the word, attending our events, applying for internships, or
+                        exploring partnership opportunities. Please contact us to discuss how you can contribute.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contact"
+        style="background:#F3F4EE; padding:4rem 0 2rem 0; margin-top:3rem; border-top:4px solid #FCFDF8;">
+        <!-- Main container for the footer content -->
+        <div
+            style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:2rem; padding:0 3rem;">
+
+            <!-- Left Column: About Querencia -->
+            <div style="flex:2; min-width:300px; padding-right: 2rem;">
+                <div
+                    style="font-size:1.5rem; font-weight:800; color:#B58080; margin-bottom:0.5rem; text-transform: uppercase; letter-spacing: 1px;">
+                    Querencia</div>
+                <div style="font-size:1rem; color:#2d2d2d; font-weight:700; margin-bottom:1rem;">Making you your own
+                    strength</div>
+                <div style="font-size:1rem; color:#555555; line-height: 1.7;">At Querencia, we empower young people to
+                    find their strength and use their voice for impact and change. We are a youth-led movement building
+                    confident, compassionate changemakers across and beyond India by teaching 21st century skills.</div>
+            </div>
+
+            <!-- Right Column: Contact & Social Links -->
+            <div style="flex:1; min-width:220px;">
+                <div
+                    style="font-size:1.2rem; font-weight:800; color:#2d2d2d; margin-bottom:1rem; text-transform: uppercase; letter-spacing: 1px;">
+                    Connect</div>
+                <div style="margin-bottom:0.8rem;">
+                    <a href="mailto:querencia.tgf@gmail.com"
+                        style="color:#555555; text-decoration:none; font-weight:600; transition: color 0.3s ease;">querencia.tgf@gmail.com</a>
+                </div>
+                <div style="margin-bottom:0.8rem;">
+                    <a href="https://instagram.com/querencia.tgf" target="_blank"
+                        style="color:#B58080; text-decoration:none; font-weight:600; transition: color 0.3s ease;">Instagram</a>
+                </div>
+                <div style="margin-bottom:0.8rem;">
+                    <a href="https://linkedin.com/company/querencia-tgf" target="_blank"
+                        style="color:#B58080; text-decoration:none; font-weight:600; transition: color 0.3s ease;">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // --- FAQ ACCORDION SCRIPT ---
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+
+                // Toggle active class on the button
+                button.classList.toggle('active');
+
+                // Check if the answer is open
+                if (button.classList.contains('active')) {
+                    // Set max-height to the content's scroll height to open it
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                } else {
+                    // Set max-height to null (or 0) to close it
+                    answer.style.maxHeight = null;
+                }
+            });
+        });
+
+        // --- SCROLL ANIMATIONS (Fade-in and Nav Bar) ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(252, 253, 248, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            } else {
+                navbar.style.background = 'rgba(252, 253, 248, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

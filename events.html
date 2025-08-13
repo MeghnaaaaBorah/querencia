@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Querencia - Events & Programs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: #2d2d2d;
+            overflow-x: hidden;
+            font-weight: 500;
+            background: #FCFDF8;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(252, 253, 248, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #F3F4EE;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #2d2d2d;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0.2rem 0.7rem;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555555;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: #B58080;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #B58080;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a.active::after,
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Header Section */
+        .page-header {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, #FCFDF8 0%, #F3F4EE 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(45deg, transparent 49%, rgba(181, 128, 128, 0.02) 50%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, rgba(181, 128, 128, 0.02) 50%, transparent 51%);
+            background-size: 80px 80px;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .page-header h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #2d2d2d;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: #555555;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .accent-line {
+            width: 80px;
+            height: 4px;
+            background: #B58080;
+            margin: 2rem auto;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: #F3F4EE;
+            padding: 2rem 0;
+            border-top: 2px solid #FCFDF8;
+            border-bottom: 2px solid #FCFDF8;
+        }
+
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .filter-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2d2d2d;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filter-btn {
+            background: #FCFDF8;
+            color: #555555;
+            border: 2px solid #F3F4EE;
+            padding: 0.8rem 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #B58080;
+            color: #FCFDF8;
+            border-color: #B58080;
+        }
+
+        /* Events Grid */
+        .events-section {
+            padding: 4rem 0;
+            background: #FCFDF8;
+        }
+
+        .events-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .event-card {
+            background: #F3F4EE;
+            border: 2px solid #FCFDF8;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: #B58080;
+        }
+
+        .event-image {
+            height: 250px;
+            background: #FCFDF8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #555555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            /* Ensure shimmer is contained */
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .event-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(181, 128, 128, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .event-content {
+            padding: 2rem;
+        }
+
+        .event-date {
+            background: #B58080;
+            color: #FCFDF8;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .past-event-date .month {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .past-event-date .year {
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2d2d2d;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .event-description {
+            color: #555555;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .event-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .event-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555555;
+        }
+
+        .event-detail strong {
+            color: #2d2d2d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .event-btn {
+            background: #B58080;
+            color: #FCFDF8;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+            border: 2px solid #B58080;
+        }
+
+        .event-btn:hover {
+            background: #a06b6b;
+            border-color: #a06b6b;
+            transform: translateY(-2px);
+        }
+
+        /* Past Events Section */
+        .past-events {
+            background: #F3F4EE;
+            padding: 4rem 0;
+            border-top: 4px solid #B58080;
+        }
+
+        .past-events h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #2d2d2d;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Styling for additional links/media */
+        .event-links {
+            margin-top: 1rem;
+        }
+
+        .event-links a {
+            color: #B58080;
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .event-links a:hover {
+            color: #a06b6b;
+        }
+
+        .event-media {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .event-media img,
+        .event-media video {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+        }
+
+        /* Meetups and Guzaarish sections */
+        .meetups-section,
+        .guzaarish-section {
+            padding: 4rem 0;
+            background: #FCFDF8;
+        }
+
+        .meetups-section h2,
+        .guzaarish-section h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #2d2d2d;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .guzaarish-content {
+            background: #F3F4EE;
+            border: 2px solid #B58080;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: center;
+            display: none;
+            /* Hidden by default */
+        }
+
+        .guzaarish-content.visible {
+            display: block;
+        }
+
+        .guzaarish-content p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .guzaarish-link {
+            color: #B58080;
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .meetup-events-list {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .meetup-events-list .event-card {
+            background: #F3F4EE;
+            border: 2px solid #FCFDF8;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .meetup-events-list .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: #B58080;
+        }
+
+        /* Social Welfare Section */
+        .social-welfare-section {
+            padding: 4rem 0;
+            background: #FCFDF8;
+        }
+
+        .welfare-events-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .event-card {
+            background: #F3F4EE;
+            border: 2px solid #FCFDF8;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: #B58080;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .filter-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .event-details {
+                grid-template-columns: 1fr;
+            }
+
+            .past-event-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .past-event-stats {
+                text-align: center;
+            }
+
+            .welfare-events-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .header-content,
+            .events-container {
+                padding: 0 1.5rem;
+            }
+
+            .event-card {
+                margin: 0 1rem;
+            }
+
+            .filter-container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        /* Animation for page load */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="index.html" style="color:inherit; text-decoration:none;">QUERENCIA</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="testimonials.html">Testimonials & Impact</a></li>
+                <li><a href="guzaarish.html">Guzaarish</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div style="height:90px;"></div>
+
+    <section class="page-header">
+        <div class="header-content">
+            <h1>Events & Programs</h1>
+            <div class="accent-line"></div>
+            <p>Join us in our mission to empower youth through transformative events, workshops, and community
+                initiatives that build leaders for tomorrow.</p>
+        </div>
+    </section>
+
+    <section class="filter-section">
+        <div class="filter-container">
+            <span class="filter-label">Filter Events:</span>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Events</button>
+                <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+                <button class="filter-btn" data-filter="workshops">Workshops</button>
+                <button class="filter-btn" data-filter="summits">Summits</button>
+                <button class="filter-btn" data-filter="training">Training</button>
+                <button class="filter-btn" data-filter="past">Past Events</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section class="events-section" id="events">
+        <div class="events-container">
+            <h2
+                style="font-size: 3rem; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; color: #2d2d2d; text-align: center; margin-bottom: 1rem;">
+                Upcoming Events</h2>
+            <div class="accent-line"></div>
+            <div class="events-grid">
+                <div class="event-card fade-in" data-category="upcoming workshops">
+                    <div class="event-image">
+                        📊 Event Image Coming Soon
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">March 15, 2025</div>
+                        <h3 class="event-title">Leadership Excellence Workshop</h3>
+                        <p class="event-description">A comprehensive workshop designed to develop critical leadership
+                            skills in young minds through interactive sessions, case studies, and practical exercises.
+                        </p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Time:</strong> 10:00 AM - 4:00 PM
+                            </div>
+                            <div class="event-detail">
+                                <strong>Location:</strong> Jorhat, Assam
+                            </div>
+                            <div class="event-detail">
+                                <strong>Capacity:</strong> 50 Participants
+                            </div>
+                            <div class="event-detail">
+                                <strong>Fee:</strong> Free
+                            </div>
+                        </div>
+                        <a href="#" class="event-btn">Register Now</a>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="upcoming summits">
+                    <div class="event-image">
+                        🎤 Event Image Coming Soon
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">April 20, 2025</div>
+                        <h3 class="event-title">Youth Parliament Summit</h3>
+                        <p class="event-description">Experience democracy in action! A simulated parliamentary session
+                            where young leaders debate, discuss, and propose solutions to real-world challenges.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Time:</strong> 9:00 AM - 5:00 PM
+                            </div>
+                            <div class="event-detail">
+                                <strong>Location:</strong> Online & Offline
+                            </div>
+                            <div class="event-detail">
+                                <strong>Capacity:</strong> 100 Participants
+                            </div>
+                            <div class="event-detail">
+                                <strong>Fee:</strong> ₹500
+                            </div>
+                        </div>
+                        <a href="#" class="event-btn">Register Now</a>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="upcoming training">
+                    <div class="event-image">
+                        💰 Event Image Coming Soon
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">May 10, 2025</div>
+                        <h3 class="event-title">Financial Literacy Bootcamp</h3>
+                        <p class="event-description">Master the fundamentals of personal finance, budgeting, investing,
+                            and entrepreneurship in this intensive 2-day bootcamp designed for young adults.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Time:</strong> 10:00 AM - 6:00 PM
+                            </div>
+                            <div class="event-detail">
+                                <strong>Location:</strong> Guwahati, Assam
+                            </div>
+                            <div class="event-detail">
+                                <strong>Capacity:</strong> 75 Participants
+                            </div>
+                            <div class="event-detail">
+                                <strong>Fee:</strong> ₹1000
+                            </div>
+                        </div>
+                        <a href="#" class="event-btn">Register Now</a>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="upcoming workshops">
+                    <div class="event-image">
+                        🗣️ Event Image Coming Soon
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">June 5, 2025</div>
+                        <h3 class="event-title">Public Speaking Mastery</h3>
+                        <p class="event-description">Overcome stage fright and become a confident speaker. Learn
+                            techniques for effective communication, storytelling, and audience engagement.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Time:</strong> 2:00 PM - 6:00 PM
+                            </div>
+                            <div class="event-detail">
+                                <strong>Location:</strong> Online Workshop
+                            </div>
+                            <div class="event-detail">
+                                <strong>Capacity:</strong> 200 Participants
+                            </div>
+                            <div class="event-detail">
+                                <strong>Fee:</strong> Free
+                            </div>
+                        </div>
+                        <a href="#" class="event-btn">Register Now</a>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="upcoming summits">
+                    <div class="event-image">
+                        👩 Event Image Coming Soon
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">July 12, 2025</div>
+                        <h3 class="event-title">Women Empowerment Summit</h3>
+                        <p class="event-description">Celebrating and empowering women leaders. A day of inspiring talks,
+                            networking, and skill-building sessions focused on women's leadership in various fields.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Time:</strong> 9:00 AM - 5:00 PM
+                            </div>
+                            <div class="event-detail">
+                                <strong>Location:</strong> Shillong, Meghalaya
+                            </div>
+                            <div class="event-detail">
+                                <strong>Capacity:</strong> 150 Participants
+                            </div>
+                            <div class="event-detail">
+                                <strong>Fee:</strong> ₹750
+                            </div>
+                        </div>
+                        <a href="#" class="event-btn">Register Now</a>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="upcoming training">
+                    <div class="event-image">
+                        🤖 Event Image Coming Soon
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">August 18, 2025</div>
+                        <h3 class="event-title">AI Awareness Workshop</h3>
+                        <p class="event-description">Understanding artificial intelligence and its impact on our future.
+                            Learn about AI tools, ethics, and how to leverage technology for positive change.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Time:</strong> 10:00 AM - 4:00 PM
+                            </div>
+                            <div class="event-detail">
+                                <strong>Location:</strong> Hybrid Event
+                            </div>
+                            <div class="event-detail">
+                                <strong>Capacity:</strong> 120 Participants
+                            </div>
+                            <div class="event-detail">
+                                <strong>Fee:</strong> ₹300
+                            </div>
+                        </div>
+                        <a href="#" class="event-btn">Register Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="past-events">
+        <div class="events-container">
+            <h2>Past Events</h2>
+            <div class="accent-line"></div>
+            <div class="events-grid">
+                <div class="event-card fade-in" data-category="past summits">
+                    <div class="event-image">
+                        📈 Conclave Image
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">DEC 2024</div>
+                        <h3 class="event-title">Northeast Youth Leadership Conclave</h3>
+                        <p class="event-description">A groundbreaking event that brought together 200+ young leaders
+                            from across Northeast India to discuss regional development and youth empowerment
+                            initiatives.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Participants:</strong> 200+
+                            </div>
+                            <div class="event-detail">
+                                <strong>States:</strong> 5
+                            </div>
+                            <div class="event-detail">
+                                <strong>Speakers:</strong> 15
+                            </div>
+                        </div>
+                        <div class="event-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="past workshops">
+                    <div class="event-image">
+                        📚 Education Drive Image
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">NOV 2024</div>
+                        <h3 class="event-title">Slum Education Drive - Phase 1</h3>
+                        <p class="event-description">Community outreach program providing educational resources and
+                            mentorship to underprivileged children in Jorhat's slum areas.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Children:</strong> 150+
+                            </div>
+                            <div class="event-detail">
+                                <strong>Volunteers:</strong> 10
+                            </div>
+                            <div class="event-detail">
+                                <strong>Duration:</strong> 3 Months
+                            </div>
+                        </div>
+                        <div class="event-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="past training">
+                    <div class="event-image">
+                        💻 Digital Skills Image
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">OCT 2024</div>
+                        <h3 class="event-title">Digital Skills for Rural Youth</h3>
+                        <p class="event-description">A comprehensive digital literacy program conducted in rural areas
+                            to bridge the digital divide and empower youth with technology skills.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Participants:</strong> 300+
+                            </div>
+                            <div class="event-detail">
+                                <strong>Villages:</strong> 8
+                            </div>
+                            <div class="event-detail">
+                                <strong>Trainers:</strong> 20
+                            </div>
+                        </div>
+                        <div class="event-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="past summits">
+                    <div class="event-image">
+                        <img src="assets/dblmun.jpg" alt="Don Bosco Lichubari Model United Nations">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">2023</div>
+                        <h3 class="event-title">Don Bosco Lichubari Model United Nations</h3>
+                        <p class="event-description">As the pioneering post-COVID MUN conference in Jorhat, this
+                            landmark event successfully convened over 220 students from more than 20 schools across the
+                            region, fostering diplomatic discourse within 6 distinct committees. Its broad accessibility
+                            as the most affordable conference underscored our unwavering commitment to inclusive skill
+                            development.
+                        </p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Participants:</strong> 220+
+                            </div>
+                            <div class="event-detail">
+                                <strong>Schools:</strong> 20+
+                            </div>
+                            <div class="event-detail">
+                                <strong>Committees:</strong> 6
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="past workshops">
+                    <div class="event-image">
+                        <img src="assets/dbbyp1.jpg" alt="Don Bosco Baghchung Youth Parliament">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">Date N/A</div>
+                        <h3 class="event-title">Don Bosco Baghchung Youth Parliament</h3>
+                        <p class="event-description">This impactful one-day youth parliament engaged over 120
+                            participants in a crucial discussion centered on Assam's pressing flood issues. Through
+                            simulated parliamentary proceedings, students masterfully honed their public speaking,
+                            critical
+                            thinking, and policy formulation skills.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Participants:</strong> 120+
+                            </div>
+                            <div class="event-detail">
+                                <strong>Duration:</strong> 1 Day
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="past summits">
+                    <div class="event-image">
+                        <img src="assets/Pragjyotika.jpg" alt="Querencia Youth Parliament, Pragjyotika English School">
+
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">Date N/A</div>
+                        <h3 class="event-title">Querencia Youth Parliament, Pragjyotika English School</h3>
+                        <p class="event-description">A large-scale one-day youth parliament, this event humbly drew
+                            over 250 participants, providing an extensive and empowering platform for young voices to
+                            engage
+                            in meaningful debates and discussions on contemporary issues.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Participants:</strong> 250+
+                            </div>
+                            <div class="event-detail">
+                                <strong>Duration:</strong> 1 Day
+                            </div>
+                        </div>
+                        <div class="event-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="past training">
+                    <div class="event-image">
+                        💻 Online Conference Image
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">Ongoing</div>
+                        <h3 class="event-title">Querencia Youth Parliament - Online Conferences</h3>
+                        <p class="event-description">Humbly extending our reach beyond geographical boundaries, these
+                            exclusive online conferences provided accessible and vital platforms for youth to engage in
+                            timely
+                            discussions on current issues. They thoughtfully ensure continuous learning from anywhere.
+                        </p>
+                        <div class="event-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="past summits workshops training">
+                    <div class="event-image">
+                        <img src="assets/skilldevelopmentsummit.jpg" alt="Querencia Skill Development Summit">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">Date N/A</div>
+                        <h3 class="event-title">Querencia Skill Development Summit</h3>
+                        <p class="event-description">Our intensive, two-day summits typically engage over 30
+                            participants in thoughtful deep dives into essential 21st-century skills. These
+                            comprehensive
+                            sessions cover Entrepreneurship & Startup Simulation, Public Speaking, Design Thinking,
+                            Financial and Media Literacy, Acing Speaking Competitions, and Leadership & Soft Skills.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Participants:</strong> 30+
+                            </div>
+                            <div class="event-detail">
+                                <strong>Duration:</strong> 2 Days
+                            </div>
+                        </div>
+                        <div class="event-links">
+                            <a href="assets/qsdsvideo.mp4" target="_blank">Video</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="meetups-section">
+        <div class="events-container">
+            <h2>Meetups & Fun Activities: Fostering Community & Creativity</h2>
+            <div class="accent-line"></div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem auto; color: #555;">
+                Some engaging activities are often carried out as a joint collaboration with our sister social welfare
+                organization, "<span class="guzaarish-link" onclick="toggleGuzaarish()">Guzaarish</span>." They foster
+                community, creativity, and personal development in an informal
+                setting, aiming to build connections beyond formal learning.
+            </p>
+            <div id="guzaarish-info" class="guzaarish-content">
+                <p><strong>Guzaarish:</strong> Guzaarish is a dedicated social welfare organization focused on [brief
+                    description of Guzaarish's mission/activities]. Our collaboration aims to extend our impact and
+                    reach more individuals through diverse community initiatives and programs.</p>
+            </div>
+
+            <div class="meetup-events-list">
+                <div class="event-card">
+                    <h3>North East Organisations Meet</h3>
+                    <p>This groundbreaking event was a humble first and only gathering in the North East dedicated to
+                        honoring social welfare NGOs. It thoughtfully brought together over 150 participants, including
+                        more than 60 NGO and NPO founders. This unique meet-up fostered an environment where
+                        organizations could share their missions and collaboratively encourage each other, strengthening
+                        the regional social welfare ecosystem.</p>
+                </div>
+                <div class="event-card">
+                    <h3>Define, 2025 - New Year Resolution Workshop</h3>
+                    <p>This practical workshop was thoughtfully designed to empower individuals by guiding them through
+                        the process of clearly defining their personal and professional goals. Participants gained
+                        valuable insights and tools to set achievable objectives and plan their paths forward with
+                        greater clarity.</p>
+                </div>
+                <div class="event-card">
+                    <h3>Pehla Pyaar - The Untold Love Stories</h3>
+                    <p>An every-other-week initiative, "Pehla Pyaar" humbly provides a safe and supportive space for
+                        open discussions about love and relationships, particularly focusing on how to navigate and
+                        handle teenage emotions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-welfare">
+        <div class="events-container">
+            <h2>Social Welfare Initiatives: Compassion in Action</h2>
+            <div class="accent-line"></div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem auto; color: #555;">
+                Querencia is deeply committed to giving back to the community, encouraging our youth to translate
+                compassion into tangible action. These initiatives are proudly undertaken in collaboration with our
+                sister
+                organization, "Guzaarish," amplifying our collective reach and positive change.
+            </p>
+            <div class="events-grid">
+
+                <div class="event-card fade-in" data-category="social-welfare">
+                    <div class="event-image">
+                        <img src="assets/social welfare.jpg" alt="Food Donation Drive">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">Ongoing</div>
+                        <h3 class="event-title">Food Donation Drives</h3>
+                        <p class="event-description">Our consistent food donation campaigns humbly address critical food
+                            insecurity. Dedicated youth volunteers diligently collect and distribute essential
+                            sustenance to
+                            ensure that families in need receive vital support.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Drives:</strong> 12+
+                            </div>
+                            <div class="event-detail">
+                                <strong>Families Reached:</strong> 100+
+                            </div>
+                        </div>
+                        <div class="event-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="social-welfare">
+                    <div class="event-image">
+                        <img src="assets/social welfare (clothes donation) 1.jpg" alt="Cloth Donation Drive">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">Ongoing</div>
+                        <h3 class="event-title">Cloth Donation Drives</h3>
+                        <p class="event-description">These initiatives provide crucial comfort to underprivileged
+                            families,
+                            especially during challenging conditions. Volunteers thoughtfully collect and distribute
+                            clothing, aiming to bring warmth and dignity to those in need.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Drives:</strong> 12+
+                            </div>
+                            <div class="event-detail">
+                                <strong>Families Supported:</strong> 100+
+                            </div>
+                        </div>
+                        <div class="event-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="social-welfare">
+                    <div class="event-image">
+                        <img src="assets/social welfare - education 3 .jpg" alt="Educational Drive in Slums">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">Ongoing</div>
+                        <h3 class="event-title">Educational Drives in Slums</h3>
+                        <p class="event-description">A cornerstone of our efforts, these drives strive to bridge
+                            educational gaps. We have been fortunate to successfully enroll children in formal
+                            schooling,
+                            offering them the opportunity for a brighter future and long-term empowerment.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Students Enrolled:</strong> 30+
+                            </div>
+                            <div class="event-detail">
+                                <strong>Collaboration:</strong> Guzaarish
+                            </div>
+                        </div>
+                        <div class="event-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="social-welfare">
+                    <div class="event-image">
+                        <img src="assets/orphanage 1.jpg" alt="Orphanage Visit">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">Regular</div>
+                        <h3 class="event-title">Orphanage Visits</h3>
+                        <p class="event-description">These heartfelt visits foster empathy and community spirit. Beyond
+                            companionship and organizing recreational activities, our consistent engagement aims to
+                            contribute to the holistic well-being of children in local orphanages.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Focus:</strong> Holistic Well-being
+                            </div>
+                            <div class="event-detail">
+                                <strong>Activities:</strong> Recreation & Mentorship
+                            </div>
+                        </div>
+                        <div class="event-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="social-welfare">
+                    <div class="event-image">
+                        <img src="assets/social welfare - dog feeding .jpg" alt="Stray Animal Feeding Drive">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">Regular</div>
+                        <h3 class="event-title">Stray Animal Feeding Drives</h3>
+                        <p class="event-description">Demonstrating compassion for all living beings, our youth
+                            volunteers
+                            regularly conduct feeding drives. These initiatives provide much-needed nourishment and care
+                            to
+                            street animals, reflecting our commitment to kindness.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Frequency:</strong> Regular
+                            </div>
+                            <div class="event-detail">
+                                <strong>Beneficiaries:</strong> Community Animals
+                            </div>
+                        </div>
+                        <div class="event-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in" data-category="social-welfare">
+                    <div class="event-image">
+                        <img src="assets/social welfare 2.jpg" alt="Cleanliness Drive">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">Regular</div>
+                        <h3 class="event-title">Cleanliness Drives</h3>
+                        <p class="event-description">Our cleanliness drives are a vital part of our community efforts,
+                            fostering a cleaner, healthier environment. Volunteers actively participate in local
+                            clean-up
+                            initiatives, beautifying public spaces and raising awareness about sanitation.</p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <strong>Goal:</strong> Healthier Environment
+                            </div>
+                            <div class="event-detail">
+                                <strong>Action:</strong> Community Clean-ups
+                            </div>
+                        </div>
+                        <div class="event-links">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(252, 253, 248, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            } else {
+                navbar.style.background = 'rgba(252, 253, 248, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const eventCards = document.querySelectorAll('.event-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                eventCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        const cardCategories = card.getAttribute('data-category');
+                        if (cardCategories.includes(filterValue)) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 100);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    }
+                });
+            });
+        });
+
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Event card hover effects
+        document.querySelectorAll('.event-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-10px)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Guzaarish toggle functionality
+        function toggleGuzaarish() {
+            const guzaarishInfo = document.getElementById('guzaarish-info');
+            guzaarishInfo.classList.toggle('visible');
+        }
+    </script>
+</body>
+
+</html>
