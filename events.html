@@ -248,7 +248,25 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center center;
             display: block;
+        }
+
+        /* Specific positioning for social welfare images */
+        .event-image img[src*="social welfare.jpg"] {
+            object-position: center 25%;
+        }
+
+        .event-image img[src*="social welfare - education"] {
+            object-position: center 35%;
+        }
+
+        .event-image img[src*="social welfare - dog feeding"] {
+            object-position: center 40%;
+        }
+
+        .event-image img[src*="social welfare 2"] {
+            object-position: center 30%;
         }
 
         .event-image::before {
@@ -1285,6 +1303,36 @@
             guzaarishInfo.classList.toggle('visible');
         }
     </script>
+
+    <footer id="contact"
+        style="background:#F3F4EE; padding:2.5rem 0 1.5rem 0; margin-top:3rem; border-top:1px solid #e0e0e0;">
+        <div
+            style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:2rem; padding:0 2rem;">
+            <div style="flex:1; min-width:250px;">
+                <div style="font-size:1.3rem; font-weight:800; color:#B58080; margin-bottom:0.5rem;">Querencia
+                </div>
+                <div style="font-size:1rem; color:#2d2d2d; font-weight:600; margin-bottom:0.3rem;">Making you your
+                    own strength</div>
+                <div style="font-size:0.98rem; color:#555; margin-bottom:1.2rem;">At Querencia, we empower young
+                    people to find their strength and use their voice for impact and change. We are a youth-led
+                    movement building confident, compassionate changemakers across and beyond India by teaching 21st
+                    century skills.</div>
+            </div>
+            <div style="flex:1; min-width:220px;">
+                <div style="font-size:1.1rem; font-weight:700; color:#B58080; margin-bottom:0.7rem;">Contact
+                </div>
+                <div style="margin-bottom:0.7rem;"><a href="mailto:querencia.tgf@gmail.com"
+                        style="color:#2d2d2d; text-decoration:none; font-weight:600;">querencia.tgf@gmail.com</a>
+                </div>
+                <div style="margin-bottom:0.7rem;"><a
+                        href="https://www.instagram.com/querencia.india_?igsh=bnVhaDQyOXVvbXF6" target="_blank"
+                        style="color:#B58080; text-decoration:none; font-weight:600;">Instagram</a></div>
+                <div style="margin-bottom:0.7rem;"><a href="https://www.linkedin.com/company/querencia-india/"
+                        target="_blank" style="color:#B58080; text-decoration:none; font-weight:600;">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

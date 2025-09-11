@@ -148,21 +148,24 @@
             margin-bottom: 1.5rem;
         }
 
-        .guzaarish-image-placeholder {
+        .guzaarish-image {
             width: 100%;
             height: 450px;
-            background: #F3F4EE;
-            border: 2px solid #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #888;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .guzaarish-image:hover {
+            transform: scale(1.02);
+        }
+
+        .guzaarish-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
         .cta-link-container {
@@ -207,21 +210,28 @@
 
         .gallery-item {
             height: 250px;
-            background: #FCFDF8;
-            border: 2px solid #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #888;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
+            background: #FCFDF8;
         }
 
         .gallery-item:hover {
             transform: scale(1.03);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
         }
 
         /* Responsive Design */
@@ -242,7 +252,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .guzaarish-image-placeholder {
+            .guzaarish-image {
                 height: 300px;
                 margin-top: 2rem;
             }
@@ -309,8 +319,8 @@
                         educational outreach. These early experiences laid the foundation for Querencia, inspired by the
                         belief that real, lasting change comes from both awareness and empowerment.</p>
                 </div>
-                <div class="guzaarish-image-placeholder">
-                    Guzaarish <br> Event Photo
+                <div class="guzaarish-image">
+                    <img src="assets/guzaarish.jpg" alt="Guzaarish Foundation Event" />
                 </div>
             </div>
             <div class="cta-link-container">
@@ -324,9 +334,15 @@
             <h2>Glimpses of Guzaarish</h2>
             <div class="accent-line"></div>
             <div class="gallery-grid">
-                <div class="gallery-item fade-in">Image Placeholder 1</div>
-                <div class="gallery-item fade-in">Image Placeholder 2</div>
-                <div class="gallery-item fade-in">Image Placeholder 3</div>
+                <div class="gallery-item fade-in">
+                    <img src="assets/guzaarish2.jpg" alt="Guzaarish Community Outreach" />
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="assets/guzaarish4.jpg" alt="Guzaarish Educational Initiative" />
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="assets/guzaarish.jpg" alt="Guzaarish Foundation Activities" />
+                </div>
             </div>
         </div>
     </section>
@@ -350,10 +366,11 @@
                 <div style="margin-bottom:0.7rem;"><a href="mailto:querencia.tgf@gmail.com"
                         style="color:#2d2d2d; text-decoration:none; font-weight:600;">querencia.tgf@gmail.com</a>
                 </div>
-                <div style="margin-bottom:0.7rem;"><a href="https://instagram.com/querencia.tgf" target="_blank"
+                <div style="margin-bottom:0.7rem;"><a
+                        href="https://www.instagram.com/querencia.india_?igsh=bnVhaDQyOXVvbXF6" target="_blank"
                         style="color:#B58080; text-decoration:none; font-weight:600;">Instagram</a></div>
-                <div style="margin-bottom:0.7rem;"><a href="https://linkedin.com/company/querencia-tgf" target="_blank"
-                        style="color:#B58080; text-decoration:none; font-weight:600;">LinkedIn</a>
+                <div style="margin-bottom:0.7rem;"><a href="https://www.linkedin.com/company/querencia-india/"
+                        target="_blank" style="color:#B58080; text-decoration:none; font-weight:600;">LinkedIn</a>
                 </div>
             </div>
         </div>
