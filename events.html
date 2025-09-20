@@ -30,7 +30,7 @@
             width: 100%;
             background: rgba(252, 253, 248, 0.95);
             backdrop-filter: blur(20px);
-            z-index: 1000;
+            z-index: 1002;
             transition: all 0.3s ease;
             border-bottom: 1px solid #F3F4EE;
         }
@@ -92,12 +92,134 @@
             width: 100%;
         }
 
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            gap: 4px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: #2d2d2d;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(252, 253, 248, 0.98);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: left 0.3s ease;
+            z-index: 1001;
+        }
+
+        /* Make nav background more opaque when mobile menu is active */
+        body:has(.mobile-nav.active) nav,
+        .mobile-nav.active~* nav {
+            background: rgba(252, 253, 248, 1);
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: #555555;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+        }
+
+        .mobile-nav-links a:hover {
+            color: #2E7D32;
+            background-color: rgba(46, 125, 50, 0.1);
+        }
+
+        /* Navigation Spacer */
+        .nav-spacer {
+            height: 100px;
+        }
+
+        /* Touch-friendly improvements for mobile */
+        @media (max-width: 968px) {
+            .nav-spacer {
+                height: 80px;
+            }
+
+            .event-btn {
+                padding: 1.2rem 2rem;
+                font-size: 0.9rem;
+                min-height: 48px;
+            }
+
+            .filter-btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            .mobile-menu-toggle {
+                min-height: 44px;
+                min-width: 44px;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-spacer {
+                height: 70px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-spacer {
+                height: 60px;
+            }
+        }
+
         /* Header Section */
         .page-header {
-            padding: 8rem 0 4rem;
+            padding: 9rem 0 4rem;
             background: linear-gradient(135deg, #FCFDF8 0%, #F3F4EE 100%);
             text-align: center;
             position: relative;
+            margin-top: 0;
         }
 
         .page-header::before {
@@ -209,9 +331,21 @@
 
         .events-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
+        }
+
+        /* Responsive grid adjustments */
+        @media (max-width: 480px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .events-grid .event-card {
+                min-width: 0;
+            }
         }
 
         .event-card {
@@ -501,7 +635,7 @@
 
         .welfare-events-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
@@ -526,6 +660,19 @@
                 display: none;
             }
 
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-container {
+                padding: 1rem 2rem;
+            }
+
+            .page-header {
+                padding: 8rem 0 3rem;
+                margin-top: 0;
+            }
+
             .page-header h1 {
                 font-size: 2.5rem;
                 letter-spacing: 2px;
@@ -538,11 +685,17 @@
             .filter-container {
                 flex-direction: column;
                 gap: 1rem;
+                padding: 0 2rem;
             }
 
             .filter-buttons {
                 flex-wrap: wrap;
                 justify-content: center;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
             }
 
             .event-details {
@@ -562,11 +715,39 @@
             .welfare-events-list {
                 grid-template-columns: 1fr;
             }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .meetup-events-list {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
         }
 
         @media (max-width: 640px) {
             .nav-container {
                 padding: 1rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .page-header {
+                padding: 7rem 0 2rem;
+                margin-top: 0;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
             }
 
             .header-content,
@@ -575,11 +756,82 @@
             }
 
             .event-card {
-                margin: 0 1rem;
+                margin: 0;
             }
 
             .filter-container {
                 padding: 0 1.5rem;
+            }
+
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .event-content {
+                padding: 1.5rem;
+            }
+
+            .event-title {
+                font-size: 1.3rem;
+            }
+
+            .past-events h2,
+            .meetups-section h2,
+            .guzaarish-section h2,
+            .social-welfare h2 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .meetup-events-list .event-card {
+                padding: 1rem;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0.8rem 1rem;
+            }
+
+            .page-header {
+                padding: 6rem 0 2rem;
+                margin-top: 0;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .header-content,
+            .events-container {
+                padding: 0 1rem;
+            }
+
+            .filter-container {
+                padding: 0 1rem;
+            }
+
+            .event-content {
+                padding: 1.2rem;
+            }
+
+            .past-events h2,
+            .meetups-section h2,
+            .social-welfare h2 {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+            }
+
+            .accent-line {
+                width: 60px;
+                height: 3px;
             }
         }
 
@@ -603,14 +855,30 @@
             <div class="logo"><a href="index.html" style="color:inherit; text-decoration:none;">QUERENCIA</a></div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="events.html">Events</a></li>
+                <li><a href="events.html" class="active">Events</a></li>
                 <li><a href="testimonials.html">Testimonials & Impact</a></li>
                 <li><a href="guzaarish.html">Guzaarish</a></li>
                 <li><a href="faqs.html">FAQs</a></li>
             </ul>
+            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
-    <div style="height:90px;"></div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-links">
+            <a href="index.html">Home</a>
+            <a href="events.html">Events</a>
+            <a href="testimonials.html">Testimonials & Impact</a>
+            <a href="guzaarish.html">Guzaarish</a>
+            <a href="faqs.html">FAQs</a>
+        </div>
+    </div>
+    <div class="nav-spacer"></div>
 
     <section class="page-header">
         <div class="header-content">
@@ -1215,6 +1483,51 @@
     </section>
 
     <script>
+        // Mobile menu functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        const body = document.body;
+
+        mobileMenuToggle.addEventListener('click', function () {
+            mobileMenuToggle.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', function () {
+                mobileMenuToggle.classList.remove('active');
+                mobileNav.classList.remove('active');
+                body.style.overflow = 'auto';
+            });
+        });
+
+        // Close mobile menu when clicking outside (but not on the toggle button)
+        document.addEventListener('click', function (event) {
+            // Don't close if clicking on the mobile menu toggle button or its children
+            if (mobileMenuToggle.contains(event.target)) {
+                return;
+            }
+
+            // Don't close if clicking inside the mobile nav
+            if (mobileNav.contains(event.target)) {
+                return;
+            }
+
+            // Close the menu if clicking outside
+            if (mobileNav.classList.contains('active')) {
+                mobileMenuToggle.classList.remove('active');
+                mobileNav.classList.remove('active');
+                body.style.overflow = 'auto';
+            }
+        });
+
+        // Prevent event bubbling on mobile menu toggle
+        mobileMenuToggle.addEventListener('click', function (event) {
+            event.stopPropagation();
+        });
+
         // Navigation scroll effect
         window.addEventListener('scroll', function () {
             const navbar = document.getElementById('navbar');

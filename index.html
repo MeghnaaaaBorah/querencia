@@ -30,7 +30,7 @@
             width: 100%;
             background: rgba(252, 253, 248, 0.95);
             backdrop-filter: blur(20px);
-            z-index: 1000;
+            z-index: 1020;
             transition: all 0.3s ease;
             border-bottom: 1px solid #F3F4EE;
         }
@@ -89,6 +89,101 @@
             width: 100%;
         }
 
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            gap: 4px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: #2d2d2d;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(252, 253, 248, 0.98);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: left 0.3s ease;
+            z-index: 1001;
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        /* Make nav background more opaque when mobile menu is active */
+        body:has(.mobile-nav.active) nav,
+        .mobile-nav.active~* nav {
+            background: rgba(252, 253, 248, 1);
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: #555555;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+        }
+
+        .mobile-nav-links a:hover {
+            color: #2E7D32;
+            background-color: rgba(46, 125, 50, 0.1);
+        }
+
+        /* Touch-friendly improvements for mobile */
+        @media (max-width: 968px) {
+            .cta-btn {
+                padding: 1.2rem 2rem;
+                font-size: 0.9rem;
+                min-height: 48px;
+            }
+
+            .mobile-menu-toggle {
+                min-height: 44px;
+                min-width: 44px;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -98,7 +193,7 @@
             background: linear-gradient(135deg, #FCFDF8 0%, #F3F4EE 100%);
             position: relative;
             overflow: hidden;
-            padding-top: 100px;
+            padding-top: 140px;
         }
 
         .hero::before {
@@ -451,6 +546,14 @@
                 display: none;
             }
 
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-container {
+                padding: 1rem 2rem;
+            }
+
             .hero h1 {
                 font-size: 3.5rem;
             }
@@ -511,6 +614,65 @@
 
             .vision-content {
                 padding: 2rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero-content {
+                padding: 0 1.5rem;
+            }
+
+            .hero-video {
+                height: 220px;
+            }
+
+            .founder-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0.8rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero .subheadline {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 2.5rem 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+            }
+
+            .hero-video {
+                height: 200px;
+            }
+
+            .cta-btn {
+                padding: 1rem 1.5rem;
+                font-size: 0.85rem;
             }
         }
 
@@ -586,8 +748,28 @@
                 <li><a href="#founder">Founder</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-links">
+            <a href="#home">Home</a>
+            <a href="events.html">Events</a>
+            <a href="testimonials.html">Testimonials & Impact</a>
+            <a href="guzaarish.html">Guzaarish</a>
+            <a href="faqs.html">FAQs</a>
+            <a href="#mission">Mission</a>
+            <a href="#vision">Vision</a>
+            <a href="#founder">Founder</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
 
     Hero Section
     <section id="home" class="hero">
@@ -716,6 +898,51 @@
     </footer>
 
     <script>
+        // Mobile menu functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        const body = document.body;
+
+        mobileMenuToggle.addEventListener('click', function () {
+            mobileMenuToggle.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', function () {
+                mobileMenuToggle.classList.remove('active');
+                mobileNav.classList.remove('active');
+                body.style.overflow = 'auto';
+            });
+        });
+
+        // Close mobile menu when clicking outside (but not on the toggle button)
+        document.addEventListener('click', function (event) {
+            // Don't close if clicking on the mobile menu toggle button or its children
+            if (mobileMenuToggle.contains(event.target)) {
+                return;
+            }
+
+            // Don't close if clicking inside the mobile nav
+            if (mobileNav.contains(event.target)) {
+                return;
+            }
+
+            // Close the menu if clicking outside
+            if (mobileNav.classList.contains('active')) {
+                mobileMenuToggle.classList.remove('active');
+                mobileNav.classList.remove('active');
+                body.style.overflow = 'auto';
+            }
+        });
+
+        // Prevent event bubbling on mobile menu toggle
+        mobileMenuToggle.addEventListener('click', function (event) {
+            event.stopPropagation();
+        });
+
         // Navigation scroll effect
         window.addEventListener('scroll', function () {
             const navbar = document.getElementById('navbar');
